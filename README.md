@@ -29,6 +29,21 @@ git clone https://github.com/alpha951/flexmoney.git
 - **backend**: Contains the Express server and MySQL database setup.
 - **frontend**: Contains the React application for the admission form.
 
+## Frontend Setup
+
+1. **Install dependencies:**
+
+    ```bash
+    cd client
+    npm install
+    ```
+
+2. **Build the frontend:**
+
+    ```bash
+    npm run build
+    ```
+
 ## Backend Setup
 
 1. **Install dependencies:**
@@ -66,20 +81,6 @@ git clone https://github.com/alpha951/flexmoney.git
     npm start
     ```
 
-## Frontend Setup
-
-1. **Install dependencies:**
-
-    ```bash
-    cd client
-    npm install
-    ```
-
-2. **Start the frontend:**
-
-    ```bash
-    npm start
-    ```
 
 ## Usage
 
@@ -90,3 +91,22 @@ git clone https://github.com/alpha951/flexmoney.git
 ## ER Diagram
 
 ![Alt text](ER-diagram.png)
+
+## Points to Note
+
+- The database is seeded with 4 batches for each day. The batch timings are as follows:
+
+```
+    - 6-7 AM
+    - 7-8 AM
+    - 8-9 AM
+    - 5-6 PM
+```
+
+- I decided not to update the username and other fields once he/she has registered for the current month. This is because the user might have already paid for the current month and updating the username would mean that the user would have to pay again for the current month. However, the user can update the username for the next month.
+
+- For the abovementioned point, I could've written a separate logic so only the other details except the `batchId` can be updated. However, I decided to keep it simple and not allow any updates once the user has registered for the current month.
+
+- As of now there is no APIs to add batches. However, I have written the migrations and seeders for the same. I can add the APIs if required. The DB admin can add batches using SQL queries as well.
+
+- **Point of concern** : I'm iterating over complete user table to check if the user is already registered for the current month. This is not a good practice as the user table can grow very large. We can use a separate table to store the current month's users and check if the user is already registered for the current month. However, I decided to keep it simple and not add any more tables.
