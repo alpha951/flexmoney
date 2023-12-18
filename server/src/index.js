@@ -5,6 +5,7 @@ const apiRoutes = require("./routes");
 
 const app = express();
 const morgan = require("morgan");
+const path = require("path");
 
 app.use(cors());
 app.use(express.json()); // for parsing application/json from request body
@@ -13,6 +14,13 @@ app.use(express.json()); // for parsing application/json from request body
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev")); //use morgan to log requests to the console
 app.use("/api", apiRoutes);
+
+app.use(express.static(path.join(__dirname, "../../client/dist")));
+
+app.use("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "../../client/dist/index.html"));
+});
+
 
 app.listen(ServerConfig.PORT, () => {
   console.log(`Successfully started the server on PORT : ${ServerConfig.PORT}`);
