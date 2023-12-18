@@ -20,9 +20,9 @@ This project is a simple admission form for yoga classes that allows users to en
 
     Clone the repository to your local machine using the following command:
     
-    ```bash
-    git clone https://github.com/alpha951/flexmoney.git
-    ```
+```bash
+git clone https://github.com/alpha951/flexmoney.git
+```
 
 ## Project Structure
 
@@ -86,3 +86,7 @@ This project is a simple admission form for yoga classes that allows users to en
 - Open your browser and go to <http://localhost:3000>.
 - Fill in the admission form with your details.
 - Choose a batch and click "Submit."
+
+## ER Diagram
+
+![Alt text](ER-diagram.png)
