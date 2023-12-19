@@ -73,7 +73,8 @@ export default function Form() {
     setLoading(true);
     try {
       console.log(JSON.stringify(formData));
-      const response = await fetch("/api/v1/user/signup", {
+      const url = "/api/v1/user/signup";
+      const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
