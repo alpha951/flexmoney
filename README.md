@@ -99,21 +99,27 @@ git clone https://github.com/alpha951/flexmoney.git
 ## IMPORTANT
     In the current setup we are running the frontend and backedn on the same port by building the react frontend first. If one want to run the frontend and backend on different ports, please follow below steps:
     - Comment out the below line in server.js file:
-        ```bash
-                app.use(express.static(path.join(__dirname, "../../client/dist")));
 
-                app.use("*", function (req, res) {
-                res.sendFile(path.join(__dirname, "../../client/dist/index.html"));
-                });
-        ```
+```js
+        app.use(express.static(path.join(__dirname, "../../client/dist")));
+
+        app.use("*", function (req, res) {
+        res.sendFile(path.join(__dirname, "../../client/dist/index.html"));
+        });
+```
+
     - Go to the ./client/src/components/Form.jsx file and update the below line:
-        ```bash
-                const url = "/api/v1/user/signup";
-        ```
-        to
-        ```bash
-                const url = "http://localhost:3000/api/v1/user/signup";
-        ```
+
+```js
+        const url = "/api/v1/user/signup";
+```
+
+to
+
+```js
+        const url = "http://localhost:3000/api/v1/user/signup";
+```
+
     - Above change is required as we are running the frontend and backend on different ports. It's assumed that the backend is running on port 3000. If the backend is running on a different port, please update the above line accordingly. Also the frontend shouldn't be running on port 3000 as it will conflict with the backend port.
 ## Usage
 
