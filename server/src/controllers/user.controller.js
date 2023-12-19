@@ -25,6 +25,20 @@ async function createUser(req, res) {
   }
 }
 
+async function getAllUser(req, res) {
+  try {
+    const users = await UserService.getAllUser();
+    SuccessResponse.data = users;
+    return res.status(StatusCodes.OK).json(SuccessResponse);
+  } catch (error) {
+    console.log("error inside the controller", error);
+    ErrorResponse.error = error;
+    Logger.error(error);
+    return res.status(error.statusCode).json(ErrorResponse);
+  }
+}
+
 module.exports = {
   createUser,
+  getAllUser,
 };

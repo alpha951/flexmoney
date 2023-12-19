@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import HashLoader from "react-spinners/HashLoader";
 import {
   Card,
   Input,
@@ -23,7 +24,22 @@ export default function Form() {
     batchId: "1", // Default batch: 5-6 PM
   });
   //   const [batchId, setBatchId] = useState("1"); // Default batch: 5-6 PM
+  const [refresh, setRefresh] = useState(true); // [1,2,3,4
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 2500));
+        setRefresh(false);
+      } catch (error) {
+        toast.error("Something went wrong!");
+        setRefresh(false);
+      }
+    };
+
+    fetchData();
+  }, []); // Empty dependency array ensures that useEffect runs once after the initial render
 
   const handleSelectChange = (e) => {
     console.log(e);
@@ -98,102 +114,129 @@ export default function Form() {
   };
 
   return (
-    <Card color='transparent' shadow={true} className='w-96'>
-      <CardHeader
-        variant='gradient'
-        color='gray'
-        className='mb-4 grid h-24 place-items-center'>
-        <Typography variant='h3' color='white'>
-          YogaPulse
-        </Typography>
-      </CardHeader>
-      <Typography color='gray' className='mt-1 font-normal'>
-        Nice to meet you! Enter your details to register.
-      </Typography>
-      <form className='mt-8 mb-2 w-80 max-w-screen-lg sm:w-96'>
-        <CardBody className='flex flex-col gap-4'>
-          <div className='mb-1 flex flex-col gap-6'>
-            <Input
-              size='lg'
-              placeholder='John Doe'
-              label='Name'
-              name='name'
-              value={formData.name}
-              onChange={handleChange}
-            />
-
-            <Input
-              size='lg'
-              placeholder='john@yogapulse.com'
-              label='Email'
-              name='email'
-              value={formData.email}
-              onChange={handleChange}
-            />
-
-            <Input
-              size='lg'
-              placeholder='24'
-              label='Age'
-              name='age'
-              value={formData.age}
-              onChange={handleChange}
-            />
-            <Typography
-              variant='small'
-              color='gray'
-              className='mt-0.1 flex items-center gap-1 font-normal'>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                viewBox='0 0 24 24'
-                fill='currentColor'
-                className='-mt-px h-4 w-4'>
-                <path
-                  fillRule='evenodd'
-                  d='M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z'
-                  clipRule='evenodd'
-                />
-              </svg>
-              Age must be between 18 and 65 to sign up.
-            </Typography>
-
-            <Select
-              color='zinc-400'
-              label='Select Batch'
-              name='batchId'
-              value={formData.batchId}
-              onChange={handleSelectChange}>
-              <Option value='1'>6-7 AM</Option>
-              <Option value='2'>7-8 AM</Option>
-              <Option value='3'>8-9 AM</Option>
-              <Option value='4'>5-6 PM</Option>
-            </Select>
-          </div>
-          <Checkbox
-            label={
-              <Typography
-                variant='small'
-                color='gray'
-                className='flex items-center font-normal'>
-                <span className='font-medium transition-colors hover:text-gray-900'>
-                  &nbsp; I&apos;ve paid the fees and agree to the T&C.
-                </span>
-              </Typography>
-            }
-            containerProps={{ className: "-ml-2.5" }}
+    <>
+      {refresh ? (
+        <Card className='mt-6 w-96 place-items-center	'>
+          <HashLoader
+            color='#10B981'
+            loading={refresh}
+            size={150}
+            aria-label='Loading Spinner'
+            data-testid='loader'
           />
-        </CardBody>
-        <CardFooter className='pt-0'>
-          <Button
-            onClick={handleSubmit}
-            className='mt-6'
-            fullWidth
-            disabled={loading}>
-            {loading ? "wait...uff my free db is slow..." : "Sign up"}
+          <Typography variant='lead' className='mt-4 mb-3'>
+            Uff! free version of render is slow...
+          </Typography>
+          <Typography variant='medium' color='gray'>
+            Give me some stipend!
+          </Typography>
+        </Card>
+      ) : (
+        <Card color='transparent' shadow={true} className='w-96'>
+          <CardHeader
+            variant='gradient'
+            color='gray'
+            className='mb-1 grid h-28	place-items-center'>
+            <Typography variant='h3' color='white'>
+              YogaPulse
+            </Typography>
+          </CardHeader>
+          <Typography color='gray' className='mt-1 font-normal'>
+            Nice to meet you! Enter your details to register.
+          </Typography>
+          <form className='mt-2 mb-1 w-80 max-w-screen-lg sm:w-96'>
+            <CardBody className='flex flex-col gap-4'>
+              <div className='mb-1 flex flex-col gap-6'>
+                <Input
+                  size='lg'
+                  placeholder='John Doe'
+                  label='Name'
+                  name='name'
+                  value={formData.name}
+                  onChange={handleChange}
+                />
+
+                <Input
+                  size='lg'
+                  placeholder='john@yogapulse.com'
+                  label='Email'
+                  name='email'
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+
+                <Input
+                  size='lg'
+                  placeholder='24'
+                  label='Age'
+                  name='age'
+                  value={formData.age}
+                  onChange={handleChange}
+                />
+                <Typography
+                  variant='small'
+                  color='gray'
+                  className='mt-0.1 flex items-center gap-1 font-normal'>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    viewBox='0 0 24 24'
+                    fill='currentColor'
+                    className='-mt-px h-4 w-4'>
+                    <path
+                      fillRule='evenodd'
+                      d='M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z'
+                      clipRule='evenodd'
+                    />
+                  </svg>
+                  Age must be between 18 and 65 to sign up.
+                </Typography>
+
+                <Select
+                  color='zinc-400'
+                  label='Select Batch'
+                  name='batchId'
+                  value={formData.batchId}
+                  onChange={handleSelectChange}>
+                  <Option value='1'>6-7 AM</Option>
+                  <Option value='2'>7-8 AM</Option>
+                  <Option value='3'>8-9 AM</Option>
+                  <Option value='4'>5-6 PM</Option>
+                </Select>
+              </div>
+              <Checkbox
+                label={
+                  <Typography
+                    variant='small'
+                    color='gray'
+                    className='flex items-center font-normal'>
+                    <span className='font-medium transition-colors hover:text-gray-900'>
+                      &nbsp; I&apos;ve paid the fees and agree to the T&C.
+                    </span>
+                  </Typography>
+                }
+                containerProps={{ className: "-ml-2.5" }}
+              />
+            </CardBody>
+            <CardFooter className='pt-0'>
+              <Button
+                onClick={handleSubmit}
+                className='-mt-4'
+                fullWidth
+                disabled={loading}>
+                {loading ? "wait...uff my free db is slow..." : "Sign up"}
+              </Button>
+            </CardFooter>
+          </form>
+          <ToastContainer />
+        </Card>
+      )}
+      {refresh ? null : (
+        <a href='/allusers'>
+          <Button variant='gradient' className='mt-2 items-center	'>
+            All Users
           </Button>
-        </CardFooter>
-      </form>
-      <ToastContainer />
-    </Card>
+        </a>
+      )}
+    </>
   );
 }

@@ -53,6 +53,20 @@ async function createUser(data) {
   }
 }
 
+async function getAllUser() {
+  try {
+    const users = await userRepository.getAll();
+    return users;
+  } catch (error) {
+    console.log(error);
+    throw new AppError(
+      "Cannot complete the get request!",
+      StatusCodes.INTERNAL_SERVER_ERROR
+    );
+  }
+}
+
 module.exports = {
   createUser,
+  getAllUser,
 };
