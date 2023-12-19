@@ -188,7 +188,7 @@ export default function Form() {
             className='mt-6'
             fullWidth
             disabled={loading}>
-            {loading ? "Submitting..." : "Sign up"}
+            {loading ? "wait...uff my free db is slow..." : "Sign up"}
           </Button>
         </CardFooter>
       </form>
