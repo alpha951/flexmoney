@@ -129,7 +129,7 @@ to
 
 ## ER Diagram
 
-![ER-Diagram Image from MySQL Workbench](ER-diagram.png)
+[ER-Diagram Image from MySQL Workbench![](https://app.eraser.io/workspace/TmhVTygyzc38YDOK0IXV/preview?elements=Bn7WsH6jI0OV3Ae6Fp81jw&type=embed)](https://app.eraser.io/workspace/TmhVTygyzc38YDOK0IXV?elements=Bn7WsH6jI0OV3Ae6Fp81jw)
 
 ## Points to Note
 
