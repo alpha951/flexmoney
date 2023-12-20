@@ -129,7 +129,7 @@ to
 
 ## ER Diagram
 
-![Alt text](ER-diagram.png)
+![ER-Diagram Image from MySQL Workbench](ER-diagram.png)
 
 ## Points to Note
 
